@@ -1,5 +1,6 @@
 import React from 'react'
 // We'll need quite a few imports from react-router-dom
+import { useParams, NavLink } from "react-router-dom";
 
 import ItemDetails from './ItemDetails'
 
@@ -11,7 +12,16 @@ export default function Item(props) {
   // Beware! The ids are integers, whereas URL parameters are strings.
   // Beware! The JSX is expecting 'item' to exist instantly!
   // we use this hook to grab they dynamic parts of the path (:itemID).
-  const item = {}
+  const { itemID } = useParams();
+
+  // string === number??!?!!?!? =>>>> FALSE
+  // string == number?!?!?! =>>>>> TRUE
+  /**
+   * NEVER USE DOUBLE EQUALS
+   * NEVER USE VAR
+   */
+
+  const item = items.find(item => item.id === parseInt(itemID));
 
   return (
     <div className='item-wrapper'>
