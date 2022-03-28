@@ -44,6 +44,10 @@ export default function App(props) {
           <Home />
         </Route>
       </Switch>
+
+      {/* <Route path="/items-list" render={props => {
+        <ItemsList {...props} items={stock} />
+      }} /> */}
     </div>
   )
 }
