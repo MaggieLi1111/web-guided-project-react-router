@@ -42,7 +42,7 @@ export default function Item(props) {
         <Route path={`${path}/description`}>
           <ItemDetails text={item.description} />
         </Route>
-        <Route>
+        <Route path={`${path}/shipping`}>
           <ItemDetails text={item.shipping} />
         </Route>
       </Switch>
