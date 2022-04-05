@@ -12,7 +12,11 @@ export default function Item(props) {
   // Beware! The ids are integers, whereas URL parameters are strings.
   // Beware! The JSX is expecting 'item' to exist instantly!
   // we use this hook to grab they dynamic parts of the path (:itemID).
-  const item = {}
+  const { itemId } = useParams();
+  const { url, path } = useRouteMatch();
+
+  const item = items.find(item => item.id === parseInt(itemId));
+  if(!items.length) return "Getting your item..."
 
   return (
     <div className='item-wrapper'>
@@ -28,10 +32,20 @@ export default function Item(props) {
 
       <nav className='item-sub-nav'>
         {/* 👉 STEP 8 - Here go the NavLinks to `<current url>/shipping` and `<current url>/description` */}
+        <NavLink to={`${url}/description`}>Description</NavLink>
+        <NavLink to={`${url}/shipping`}>Shipping</NavLink>
       </nav>
 
       {/* 👉 STEP 9 - Here go the Routes for `<current path>/shipping` and `<current path>/description` */}
       {/* These Routes should render <ItemDetails /> */}
+      <Switch>
+        <Route path={`${path}/description`}>
+          <ItemDetails text={item.description} />
+        </Route>
+        <Route>
+          <ItemDetails text={item.shipping} />
+        </Route>
+      </Switch>
 
       {/* 👉 STEP 10 - Shorten paths and urls with `useRouteMatch` hook */}
     </div>
